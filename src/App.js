@@ -2,17 +2,23 @@ import React from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
-import Rooms from "./pages/Rooms";
-import SingleRooms from "./pages/SingleRoom";
+import AllProducts from "./pages/AllProducts";
+import Product from "./pages/Product";
 import Error from "./pages/Error";
 
+import { Route, Switch } from "react-router-dom";
+
+import Navbar from "./components/Navbar"
 function App() {
   return (
     <>
-      <Home></Home>
-      <Rooms></Rooms>
-      <SingleRooms></SingleRooms>
-      <Error></Error>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/products/" component={AllProducts} />
+        <Route exact path="/products:item" component={Product} />
+        <Route component={Error} />
+      </Switch>
     </>
   );
 }
