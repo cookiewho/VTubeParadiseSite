@@ -9,6 +9,7 @@ module.exports = {
     filename: "index.js",
     publicPath: "/",
   },
+  devtool: "inline-source-map",
   devServer: {
     contentBase: "./dist",
     hot: true,
@@ -21,7 +22,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: ["babel-loader", "eslint-loader"],
         },
       },
       {
@@ -34,10 +35,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader', options: { injectType: 'styleTag' } }, "css-loader"],
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpeg|jpg|svg|gif|ico)?$/,
+        test: /\.(png|jpeg|jpg|gif|ico)?$/,
         exclude: /node_modules/,
         use: ["file-loader?name=[name].[ext]"],
       },
@@ -45,7 +46,7 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: 'svg-url-loader',
+            loader: "svg-url-loader",
             options: {
               limit: 10000,
             },
@@ -55,9 +56,9 @@ module.exports = {
     ],
   },
   plugins: [
-       new HtmlWebPackPlugin({
-        template: path.resolve(__dirname, "./src/index.js"),
-        filename: "index.js",
-      }),
-   ].filter(Boolean)
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, "./src/index.js"),
+      filename: "index.js",
+    }),
+  ].filter(Boolean),
 };
